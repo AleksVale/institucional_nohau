@@ -80,12 +80,12 @@ export function Expert() {
   }
   return (
     <div className="bg-gradiante-bg bg-no-repeat bg-cover bg-invert">
-      <div className="flex w-full flex-col items-center justify-center p-6 bg-black bg-opacity-20 ">
+      <div className="flex w-full flex-col items-center justify-center lg:p-6 p-2 bg-black bg-opacity-20 ">
         <Helmet title="Aplicação para Expert" />
         <div className="p-16 ">
           <img src={logo} alt="nohau logo" />
         </div>
-        <div className="bg-muted mb-10 w-3/4 rounded p-6">
+        <div className="bg-muted mb-10 lg:w-3/4 rounded lg:p-6 w-full px-2 py-6">
           <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
             Aplicação para Expert
           </h3>
@@ -110,7 +110,7 @@ export function Expert() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="bg-muted w-3/4 space-y-4 rounded p-6"
+            className="bg-muted lg:w-3/4 space-y-4 rounded lg:p-6 w-full px-2 py-6"
           >
             <FormField
               control={form.control}
