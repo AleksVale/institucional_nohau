@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input'
 import { Loader2 } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ExpertForm, ExpertSchema } from './validation'
 import { toast } from 'react-toastify'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -21,6 +21,7 @@ import { MaskitoOptions } from '@maskito/core'
 import { useMaskito } from '@maskito/react'
 import ExpertRequestService from '@/services/expert-request.service'
 import logo from '../assets/logo-laranja.png'
+import { useEffect } from 'react'
 const phoneMask: MaskitoOptions = {
   mask: [
     '(',
@@ -41,6 +42,7 @@ const phoneMask: MaskitoOptions = {
   ],
 }
 export function Expert() {
+  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const form = useForm<ExpertForm>({
     resolver: zodResolver(ExpertSchema),
@@ -59,6 +61,24 @@ export function Expert() {
       whatsapp: '',
     },
   })
+
+  useEffect(() => {
+    const utmSource = searchParams.get('utm_source')
+    const utmMedium = searchParams.get('utm_medium')
+    const utmCampaign = searchParams.get('utm_campaign')
+    const utmTerm = searchParams.get('utm_term')
+    const utmContent = searchParams.get('utm_content')
+    if (!utmSource && !utmMedium && !utmCampaign && !utmTerm && !utmContent) {
+      return console.error('Missing UTM params')
+    }
+    ExpertRequestService.createUtm({
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      utmTerm,
+      utmContent,
+    })
+  }, [])
 
   const phoneRef = useMaskito({ options: phoneMask })
 
