@@ -21,6 +21,7 @@ import { MaskitoOptions } from '@maskito/core'
 import { useMaskito } from '@maskito/react'
 import ExpertRequestService from '@/services/expert-request.service'
 import logo from '../assets/logo-laranja.png'
+// import ReactGA from 'react-ga4'
 import { useEffect } from 'react'
 const phoneMask: MaskitoOptions = {
   mask: [
@@ -88,6 +89,11 @@ export function Expert() {
     try {
       const response = await ExpertRequestService.create(values)
       if (response.data.success) {
+        // ReactGA.send({
+        //   hitType: 'event',
+        //   eventCategory: 'Expert',
+        //   eventAction: 'submit',
+        // })
         toast.success('Sua solicitação foi enviada com sucesso!')
         navigate('/')
       } else {
