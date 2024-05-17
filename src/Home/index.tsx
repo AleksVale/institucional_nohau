@@ -1,3 +1,9 @@
+import { Navigate } from 'react-router-dom'
+
 export function Home() {
-  return <div>Home</div>
+  return (
+    <div>
+      <Navigate to={'/expert'} />
+    </div>
+  )
 }
